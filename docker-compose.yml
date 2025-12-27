@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: ksana_postgres
+    environment:
+      POSTGRES_DB: ksana_db
+      POSTGRES_USER: ksana_user
+      POSTGRES_PASSWORD: ksana_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+volumes:
+  pgdata:

@@ -1,0 +1,18 @@
+INSERT INTO core.users (mobile_number, name) VALUES ('9701927745', 'Srikanth Test User');
+INSERT INTO core.categories (name) VALUES ('Groceries');
+INSERT INTO core.products (name, category_id, barcode) VALUES ('Rice 5kg', 1, 'RICE12345');
+INSERT INTO inventory.inventory (product_id, vendor_id, stock_quantity) VALUES (1, 1, 100);
+INSERT INTO orders.orders (user_id, fulfillment_type, total_amount, order_status, payment_status) VALUES (1,'DELIVERY',500.00, 'PLACED', 'PENDING');
+INSERT INTO orders.order_items (order_id, product_id, vendor_id, quantity, final_price) VALUES (1, 1, 1, 1, 500.00);
+
+=================================github===============
+
+https://github.com/vikas99341/k8s-masterclass
+
+Srikanth$123
+
+
+====================================DB Connect===========================
+
+>docker exec -it ksana_postgres psql -U ksana_user -d ksana_db
+
