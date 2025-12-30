@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ksana_db?TimeZone=Asia/Kolkata
+    username: ksana_user
+    password: ksana_pass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false

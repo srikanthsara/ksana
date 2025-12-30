@@ -8,11 +8,17 @@ INSERT INTO orders.order_items (order_id, product_id, vendor_id, quantity, final
 =================================github===============
 
 https://github.com/vikas99341/k8s-masterclass
-
 Srikanth$123
-
-
-====================================DB Connect===========================
+====================================DB Connect======================
 
 >docker exec -it ksana_postgres psql -U ksana_user -d ksana_db
 
+=====================================================================
+CREATE DATABASE ksana;
+
+CREATE USER ksana_user WITH PASSWORD 'ksana_password';
+
+GRANT ALL PRIVILEGES ON DATABASE ksana TO ksana_user;
+
+======================================================================
+psql -h localhost -p 5432 -U ksana_user -d ksana_db
