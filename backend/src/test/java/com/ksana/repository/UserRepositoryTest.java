@@ -1,6 +1,6 @@
 package com.ksana.repository;
 
-import com.ksana.model.entity.User;
+import com.ksana.entity.User;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

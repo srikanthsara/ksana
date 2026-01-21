@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: ksana
+
+
+  web:
+   cors:
+    allowed-origins: "*"
+    allowed-methods: GET,POST,PUT,DELETE
+
+  security:
+    public-urls:
+      - /auth/**
+      - /swagger-ui/**
+      - /v3/api-docs/**
+
+    jwt:
+      secret: ksana-super-secret-key-change-in-prod
+      expiration-ms: 1800000   # 30 minutes
+
+server:
+  port: 8081
+  servlet:
+    context-path:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+
+logging:
+  level:
+    org.springframework.web.servlet.DispatcherServlet: TRACE
+    org.springframework.http.converter.json: TRACE
+

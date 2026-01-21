@@ -3,14 +3,16 @@ package com.ksana.service.impl;
 import com.ksana.dto.request.CreateUserRequest;
 import com.ksana.dto.request.UpdateUserRequest;
 import com.ksana.dto.response.UserResponse;
+import com.ksana.entity.User;
 import com.ksana.exception.ResourceNotFoundException;
-import com.ksana.model.entity.User;
 import com.ksana.repository.UserRepository;
 import com.ksana.service.UserService;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,23 +20,29 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    // ✅ SINGLE constructor (Spring will use this automatically)
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserResponse create(CreateUserRequest request) {
+
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
 
-        User user = new User(
-                null,
-                request.getName(),
-                request.getEmail(),
-                request.getPassword()
-        );
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setName(request.getName());              // ✅ FIX
+        user.setEmail(request.getEmail());
+        user.setRole("ADMIN");
+        user.setCreatedAt(LocalDateTime.now());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         User saved = userRepository.save(user);
         return toResponse(saved);

@@ -21,4 +21,16 @@ CREATE USER ksana_user WITH PASSWORD 'ksana_password';
 GRANT ALL PRIVILEGES ON DATABASE ksana TO ksana_user;
 
 ======================================================================
-psql -h localhost -p 5432 -U ksana_user -d ksana_db
+psql -h localhost -p 5433 -U ksana_user -d ksana_db
+
+SELECT id, username, name, email, role, created_at FROM users;
+
+select *from from users;
+
+=======================================================
+to generate token:
+-------------------
+
+
+C:\Users\srika>curl -X POST http://localhost:8081/ksana/auth/login -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"admin123\"}"
+{"token":"eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2Nzg5OTYyNSwiZXhwIjoxNzY3OTAxNDI1fQ.sOWQ2BE1kMUEEylvE9dNx39o4iXsAdKsfMDnUb5YjLgGnVPPdFBHSPt-Hp05zLm7"}
