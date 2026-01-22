@@ -5,6 +5,8 @@ import com.ksana.dto.request.UpdateUserRequest;
 import com.ksana.dto.response.UserResponse;
 import com.ksana.service.UserService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -23,12 +25,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@Tag(name = "User APIs")
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
 
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','SALES')")
+    @GetMapping("/profile")
+    public String profile() {
+        return "User Profile";
     }
 
     @PostMapping
