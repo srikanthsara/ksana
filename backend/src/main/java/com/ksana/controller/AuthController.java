@@ -29,10 +29,8 @@ public class AuthController {
 
     @PostMapping(value = "/login", consumes = "application/json")
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequest request) {
-
         System.out.println("✅ LOGIN HIT");
         System.out.println("User = " + request.getUsername());
-
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(

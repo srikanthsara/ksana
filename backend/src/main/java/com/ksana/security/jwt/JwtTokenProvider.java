@@ -2,8 +2,10 @@ package com.ksana.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -14,27 +16,28 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    private static final String SECRET =
-            "ksana-super-secret-key-change-in-prod-ksana-super-secret";
+    @Value("${spring.security.jwt.secret}")
+    private String jwtSecret;
 
-    private static final long EXPIRATION_MS = 1800000; // 30 min
+    @Value("${spring.security.jwt.expiration-ms}")
+    private long expirationMs;
 
     private SecretKey key;
 
     @PostConstruct
     public void init() {
         this.key = Keys.hmacShaKeyFor(
-                SECRET.getBytes(StandardCharsets.UTF_8)
+                jwtSecret.getBytes(StandardCharsets.UTF_8)
         );
     }
 
     // ✅ CREATE TOKEN
     public String generateToken(Authentication authentication) {
         return Jwts.builder()
-                .subject(authentication.getName())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
-                .signWith(key)
+                .setSubject(authentication.getName())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .signWith(key, SignatureAlgorithm.HS256) // ✅ FIX
                 .compact();
     }
 

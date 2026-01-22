@@ -26,6 +26,9 @@ public class CreateUserRequest {
     @NotBlank
     private String password;
 
+    @NotBlank
+    private String role;
+
     public String getUsername() {
         return username;
     }
@@ -56,5 +59,13 @@ public class CreateUserRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

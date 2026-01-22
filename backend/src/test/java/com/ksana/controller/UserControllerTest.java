@@ -46,7 +46,7 @@ class UserControllerTest {
         request.setPassword("secret");
 
         UserResponse response =
-                new UserResponse(1L, "John", "john@test.com");
+                new UserResponse(1L, "John", "john@test.com","sales");
 
         when(userService.create(request)).thenReturn(response);
 

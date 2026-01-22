@@ -23,7 +23,8 @@ class UserRepositoryTest {
                 null,
                 "John",
                 "john@test.com",
-                "secret"
+                "secret",
+                "sales"
         );
 
         userRepository.save(user);

@@ -45,7 +45,7 @@ class UserServiceImplTest {
         when(userRepository.save(Mockito.any(User.class)))
                 .thenAnswer(invocation -> {
                     User u = invocation.getArgument(0);
-                    return new User(1L, u.getName(), u.getEmail(), u.getPassword());
+                    return new User(1L, u.getName(), u.getEmail(), u.getPassword(),u.getRole());
                 });
 
         UserResponse response = userService.create(request);

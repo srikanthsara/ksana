@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
     // ✅ SINGLE constructor (Spring will use this automatically)
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder) {
@@ -38,9 +37,9 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setName(request.getName());              // ✅ FIX
+        user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setRole("ADMIN");
+        user.setRole(request.getRole());
         user.setCreatedAt(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -85,7 +84,8 @@ public class UserServiceImpl implements UserService {
         return new UserResponse(
                 user.getId(),
                 user.getName(),
-                user.getEmail()
+                user.getEmail(),
+                user.getRole()
         );
     }
 }
