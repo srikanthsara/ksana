@@ -74,7 +74,7 @@ Service Discovery (Eureka/Consul) enables dynamic registration and discovery, wh
 🔹 Cloud-native and production ready
 
 Tech Stack: Spring Boot | Spring Cloud Gateway | Eureka | Config Server | Resilience4j | Kafka/RabbitMQ | JPA/Hibernate
-### #############
+### #############################
 
 #######kafka########################
 
