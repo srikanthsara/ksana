@@ -2,6 +2,7 @@ package com.ksana.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,20 +14,23 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateUserRequest {
 
-    @NotBlank
+    @NotBlank(message = "username is required")
+    @Size(min = 3, max = 50, message = "username must be 3-50 chars")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "name is required")
+    @Size(min = 2, max = 120, message = "name must be 2-120 chars")
     private String name;
 
-    @Email
-    @NotBlank
+    @NotBlank(message = "email is required")
+    @Email(message = "invalid email format")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "password is required")
+    @Size(min = 6, max = 72, message = "password must be 6-72 chars")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "role is required")
     private String role;
 
     public String getUsername() {

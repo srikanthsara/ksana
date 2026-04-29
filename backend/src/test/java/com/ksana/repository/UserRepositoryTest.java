@@ -23,6 +23,7 @@ class UserRepositoryTest {
                 null,
                 "John",
                 "john@test.com",
+                "john",
                 "secret",
                 "sales"
         );

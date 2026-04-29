@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,11 +60,10 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public UserResponse update(
-            @PathVariable Long id,
-            @Valid @RequestBody UpdateUserRequest request ) {
-        return userService.update(id, request);
+    @PreAuthorize("@authz.isAdminOrSelf(#id)")
+    public ResponseEntity<UserResponse> update(@PathVariable Long id,
+                                               @RequestBody @Valid UpdateUserRequest request) {
+        return ResponseEntity.ok(userService.update(id, request));
     }
 
     @DeleteMapping("/{id}")

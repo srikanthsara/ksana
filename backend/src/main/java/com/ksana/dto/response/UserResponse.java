@@ -1,21 +1,32 @@
 package com.ksana.dto.response;
 
+import java.time.LocalDateTime;
+
 public class UserResponse {
 
     private Long id;
+    private String username;
     private String name;
     private String email;
     private String role;
+    private LocalDateTime createdAt;
 
-    public UserResponse(Long id, String name, String email, String role) {
+    public UserResponse(Long id, String username, String name,
+                        String email, String role, LocalDateTime createdAt) {
         this.id = id;
+        this.username = username;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getName() {
@@ -28,6 +39,10 @@ public class UserResponse {
 
     public String getRole() {
         return role;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
 }

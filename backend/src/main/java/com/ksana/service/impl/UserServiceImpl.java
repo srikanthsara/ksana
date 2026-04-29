@@ -4,6 +4,7 @@ import com.ksana.dto.request.CreateUserRequest;
 import com.ksana.dto.request.UpdateUserRequest;
 import com.ksana.dto.response.UserResponse;
 import com.ksana.entity.User;
+import com.ksana.exception.ConflictException;
 import com.ksana.exception.ResourceNotFoundException;
 import com.ksana.repository.UserRepository;
 import com.ksana.service.UserService;
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserService {
 
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
+        }
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new ConflictException("Username already exists");
         }
 
         User user = new User();
@@ -83,9 +87,11 @@ public class UserServiceImpl implements UserService {
     private UserResponse toResponse(User user) {
         return new UserResponse(
                 user.getId(),
+                user.getUsername(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
+                user.getRole(),
+                user.getCreatedAt()
         );
     }
 }
