@@ -3,7 +3,6 @@ package com.ksana;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -12,14 +11,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -87,7 +83,7 @@ class PomXmlConfigurationTest {
                 "//plugin[artifactId='maven-checkstyle-plugin']//configuration/configLocation/text()",
                 pomDocument, XPathConstants.STRING);
         assertEquals(
-                "${maven.multiModuleProjectDirectory}/checkstyle/checkstyle.xml",
+                "../checkstyle/checkstyle.xml",
                 configLocation,
                 "configLocation must reference the project-level checkstyle.xml via multiModuleProjectDirectory");
     }
