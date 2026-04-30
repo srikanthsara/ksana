@@ -62,7 +62,8 @@ public class UserController {
     @PutMapping("/{id}")
     @PreAuthorize("@authz.isAdminOrSelf(#id)")
     public ResponseEntity<UserResponse> update(@PathVariable Long id,
-                                               @RequestBody @Valid UpdateUserRequest request) {
+                                               @RequestBody @Valid
+                                               UpdateUserRequest request) {
         return ResponseEntity.ok(userService.update(id, request));
     }
 
